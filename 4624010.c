@@ -38,11 +38,11 @@ int drop(int a[][3],int packet[3], long int *dropped, long int *datasize){
 			(*dropped)++;
 		}
 		else{
-			for(i; a[i][0] != 0;i++);	//ý am finding the last packet in the queue
+			for(i; a[i][0] != 0;i++);	//Ã½ am finding the last packet in the queue
 			i--;						//index of last nonzero packet 
 			(*datasize) -= a[i][1];		//length of dropped packet from queue is being subtracted from queue size
 			
-			a[i][0]=0;			//ý am setting the low priority packet in the port queue to the zero
+			a[i][0]=0;			//Ã½ am setting the low priority packet in the port queue to the zero
 			a[i][1]=0;
 			a[i][2]=0;
 		}
@@ -60,12 +60,9 @@ int drop(int a[][3],int packet[3], long int *dropped, long int *datasize){
 			a[i][1] = a[i+1][1];
 			a[i][2] = a[i+1][2];
 		}		
-	
-	
 }
 
 
-	
 int dequeue(int a[][3], long long int *num_of_bytes, int *num_high_priority, int *num_low_priority, long int *size){
 	
 	*num_of_bytes += a[0][1];	//first,packet length of queue is added to num_of_bytes
@@ -80,15 +77,12 @@ int dequeue(int a[][3], long long int *num_of_bytes, int *num_high_priority, int
 	a[0][2] = 0;
 		
 	int i = 0;
-	for(i; a[i+1][1] != 0; i++ )
-	{
+	for(i; a[i+1][1] != 0; i++ ){
 		
 		a[i][0] = a[i+1][0]; 	//index of every packet in the queue are going
 		a[i][1] = a[i+1][1];	//1 step back
 		a[i][2] = a[i+1][2];
-		
 	}
-	
 }
 
 
@@ -116,14 +110,14 @@ int main(){
 	int sum =0;				//every 1 second.
 	int finish;				//time to finish execution
 	int start = clock();	//starting of execution 
+	
 	time1 = clock();			
 
 	printf("\nHow many milisecond program should run?\n");
 	scanf("%d",&how_long);	//we are taking the execution time of code.
 	printf("What is percentage of congestion (it should be between 0 and 100)\n");
 	scanf("%d",&ratio);	
-	while(1)
-	{	
+	while(1){	
 		dst_ip = (rand()%4)+1;		//packet data are being produced
 		len = rand()%1401+100;		
 		priority = rand()%2;
@@ -188,8 +182,8 @@ int main(){
 		}
 		
 		
-		if(count_enqueue>=2500){	//ý started dequeue the ports after some amount of data is being enqueued.
-									//ý used same congestion rate for all ports to dequeue.
+		if(count_enqueue>=2500){	//Ã½ started dequeue the ports after some amount of data is being enqueued.
+									//Ã½ used same congestion rate for all ports to dequeue.
 			long int count_dequeue =0;
 			for(count_dequeue = 0; 100*count_dequeue < count_enqueue1*(100-ratio)  ; count_dequeue++){	
 				dequeue(port1_queue, &num_of_bytes, &num_high_priority, &num_low_priority, &datasize_1);
